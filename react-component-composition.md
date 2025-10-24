@@ -1,25 +1,27 @@
-# Component composition that worked for me
+# Component Composition That Worked for Me
 
-In react, the most interesting part for me while I was learning it, was the component creation since you are upscaling yourself from multi-page applications like php or vanilla javascript. Those are the basic building blocks for creating a UI in react. Why I feel it more interesting is just because of its reusability nature. We can create a component that can used in multiple places, but only struggle is to architecting the component to fit in every possible ways. That's could be hard but once you understand the basic tricks it will started falling in correct places.
+☕ *6 min read*
 
-In the beginning, I was building react component development in the conventional way. 
+When I was learning React, the most interesting part for me was component creation - especially coming from a background of multi-page applications like PHP or vanilla JavaScript. Components are the basic building blocks for creating UIs in React, and what makes them so fascinating is their reusability. You can create a component and use it in multiple places, but the real struggle is architecting it to fit every possible scenarios. That can be tough, but once you understand the basic tricks, everything starts falling into place 🎯
 
-> Like building component without architecting it properly and in case of reusability it became a nightmare, for maintaining the props in the component and maintaining the entire components.
+In the beginning, I was building React components the conventional way.
 
-Nowadays if you are more depend on AI, and if you are not composing the AI while building the products most of the time it ended up giving the same nightmare while you are reviewing the code. Since AI is there it's not nightmare for us (May be or May be not 🤷‍♂️)
+> Building components without properly architecting them. When it came to reusability, it became a nightmare - maintaining all the props and managing the entire component structure was painful.
+
+Nowadays, if you're heavily relying on AI and not carefully crafting your prompts while building products, you'll often end up with the same nightmare when reviewing the code. Since AI is here to help though, maybe it's not a nightmare anymore... or maybe it still is 🤷‍♂️
 
 
-Too much of drama, let's get in to business. Let's define the problem what I am trying to tell here.
+Alright, enough drama - let's get down to business. Let me show you the problem I'm talking about.
 
 
 ![Basic UI](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/l25ycmjiycwrtjf0n0vb.png)
 
 
-Consider checking the above image. In that image I am trying to render a list of product packages. Don't mind the level 1 notation, where it is used to identify various scenarios. 
+Check out the image above. I'm rendering a list of product packages. Don't mind the "Level 1" notation - I'm using it to identify different scenarios.
 
-So let's write some code for the above screenshot.
+Let's write some code for this.
 
-Assume this is the list which I am trying to render.
+Here's the list I'm trying to render:
 ```json
 const PRODUCTS: Array<Product> = [
   {
@@ -57,7 +59,7 @@ const PRODUCTS: Array<Product> = [
 ];
 ```
 
-And listing logic would be straight forward, right!
+The listing logic is straightforward, right?
 
 ```react
 export default function App() {
@@ -75,7 +77,7 @@ export default function App() {
 }
 ```
 
-And `ProductCard` would look like this
+And the `ProductCard` would look like this:
 
 ```react
 export interface Product {
@@ -109,15 +111,15 @@ const ProductCard = ({ product }: ProductProps) => {
 export default ProductCard;
 ```
 
-Right now `ProductCard` seems neat, but I will show you how we can complicate it.
+Right now, `ProductCard` looks pretty neat. But let me show you how things can get complicated.
 
-Lets try adding another scenario.
+Let's add another scenario.
 
-So In my level 2, I wanted show only one action button lets say Purchase button only.
+In Level 2, I want to show only one action button - let's say just the Purchase button.
 
 ![Level 2 Scenario](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/naodexjhuwh8g6qlphjl.png)
 
-So in that case, usually what I does was, adding a new prop will solves the problem right? 
+In this case, what I usually did was add a new prop. That solves the problem, right? 
 
 ```react
 {PRODUCTS.map((product) => (
@@ -146,9 +148,9 @@ const ProductCard = ({
 };
 ```
 
-Done. This will now show only purchase button if you pass `showViewButton` prop as `false`.
+Done! This will now show only the Purchase button if you pass the `showViewButton` prop as `false`.
 
-Let's build level3 scenario. In this I don't want any action buttons.
+Let's move to Level 3. In this scenario, I don't want any action buttons at all.
 
 ![Level 3 Scenario](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/wnmtvg0kj2bn40kco9r5.png)
 
@@ -188,7 +190,7 @@ const ProductCard = ({
   );
 };
 ```
-Right now the complexity for the component have been increased in terms of maintainability. Let's make even more complex. In Level 4, I wanted to show custom text for Best Seller badge. If you remember we have been hardcoded the Best Seller text inside the product card. Again the best option is to passing it as prop right? 
+Now the component's complexity has increased in terms of maintainability. Let's make it even more complex. In Level 4, I want to show custom text for the Best Seller badge. Remember how we hardcoded "Best Seller" inside the product card? Again, the best option is passing it as a prop, right? 
 
 ![Level 4 Scenario](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/p4xopj9wbfsetnv2hsip.png)
 
@@ -225,11 +227,11 @@ const ProductCard = ({
 };
 ```
 
-Let's make it step more complex. In Level 5 I want show Wishlist button.
+Let's make it one step more complex. In Level 5, I want to show a Wishlist button.
 
 ![Level 5 Scenario](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tb4ztwp3s3ddlwvlsx19.png)
 
-Well again adding props will fix here as well.
+Well, again, adding props will fix this too.
 
 ```react
 {PRODUCTS.map((product) => (
@@ -273,11 +275,11 @@ const ProductCard = ({
 };
 ```
 
-Right now, each feature adding resulted in adding new props and changes in the `ProductCard` component and made it complex. If in future if new levels with new feature were added, it again spike the complex if we keep on adding props and managing the render using props.
+Right now, each new feature means adding new props and changes to the `ProductCard` component, making it more complex. If we add more levels with new features in the future, the complexity will keep spiking if we continue adding props and managing renders this way. This is the nightmare I'm talking about.
 
-So what we can do here or what actually worked me here on solving this problem is by making each element a reusable one or a generic one so that. Simple as that. This is not a latest technique which I am introducing, it's a pretty old one which is still relevant.
+So what can we do? What actually worked for me to solve this problem is making each element reusable and generic. Simple as that. This isn't some new technique I'm introducing - it's a pretty old one, but it's still super relevant.
 
-I will show you how
+Let me show you how:
 
 ```react
 type CardProps = PropsWithChildren;
@@ -312,7 +314,7 @@ const CardBadge = ({ hidden = false, children }: CardBadgeProps) => {
 };
 ```
 
-Now every component is stripped to its molecular level. Since every components are base form you can export each element to build the UI which Like you wanted. Or you can use dot notations to add you function components to another functional component like this:
+Now every component is stripped down to its molecular level. Since all components are in their base form, you can export each element to build the UI however you want. Or you can use dot notation to attach your function components to another functional component like this:
 
 ```react
 export default Card;
@@ -323,7 +325,7 @@ Card.Badge = CardBadge;
 Card.Image = CardImage;
 ```
 
-And you can import and use it like
+And you can import and use it like this:
 ```react
 import Card from "./Card";
 ....
@@ -339,7 +341,7 @@ import Card from "./Card";
  </Card> 
 ```
 
-Now the problem is not solved here, the above code is the replica of the Level 1 product card what about others? Right now we have building blocks, what we usually does with that? build it right? The fact is that, it does not making any duplications here, but reusing the existing components. Let's make me show you the final one as well.
+Now hold on - the problem isn't fully solved yet. The code above is just a replica of the Level 1 product card. What about the others? Right now we have building blocks. What do we usually do with building blocks? We build things, right? The key here is that we're not creating duplications - we're reusing the existing components. Let me show you the final solution:
 
 ```react
 import Card from "./Card";
@@ -414,10 +416,18 @@ export { Level1Card, Level2Card, Level3Card, Level4Card, Level5Card };
 
 ```
 
-If you are thinking about the functionalities, like purchase / view / Wishlist actions. For that I usually go by using custom hooks or providers to defined the actions generically and reuse it everywhere it needed. That's sound straight forward right?
+If you're wondering about the functionalities - like purchase, view, or wishlist actions - I usually handle those using custom hooks or providers. This way I can define the actions generically and reuse them wherever needed. Sounds straightforward, right?
 
-Code became smaller and easy to understand and readable so as the maintainability as well.
+The code became smaller, easier to understand, more readable, and way more maintainable.
 
-On a closing note, this technique made super easy for me to maintain the components. I found my peers also found easy while reviewing the PRs or reusing the components I written in some other scenarios. Here  I am attaching the full working code with the above examples here.
+On a closing note, this technique made it super easy for me to maintain components. My peers also found it easier when reviewing PRs or reusing components I'd written in other scenarios. I'm attaching the full working code with all the examples below.
 
 {% embed https://codesandbox.io/embed/43h8gz?view=editor&module=%2Fsrc %}
+
+---
+
+Hope this helps you tackle your component composition challenges! Remember, sometimes the best solution isn't adding more - it's breaking things down to their simplest form.
+
+Until next time, happy coding! ✌️
+
+> "Simplicity is the ultimate sophistication." – Leonardo da Vinci
