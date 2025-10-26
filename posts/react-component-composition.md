@@ -1,6 +1,17 @@
-# Component Composition That Worked for Me
+---
+title: "Component Composition That Worked for Me"
+date: "2024-10-24"
+category: "React"
+description: "How I solved component complexity using composition patterns in React - breaking down components to their molecular level for better reusability and maintainability"
+tags: ["react", "components", "architecture", "typescript", "frontend"]
+crossPosts:
+  - platform: "dev.to"
+    url: "https://dev.to/example"
+  - platform: "LinkedIn"
+    url: "https://linkedin.com/example"
+---
 
-☕ *6 min read*
+# Component Composition That Worked for Me
 
 When I was learning React, the most interesting part for me was component creation - especially coming from a background of multi-page applications like PHP or vanilla JavaScript. Components are the basic building blocks for creating UIs in React, and what makes them so fascinating is their reusability. You can create a component and use it in multiple places, but the real struggle is architecting it to fit every possible scenarios. That can be tough, but once you understand the basic tricks, everything starts falling into place 🎯
 

@@ -1,0 +1,270 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for markdown content */
+.prose {
+  @apply max-w-none text-gray-800 dark:text-gray-200;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.prose h1 {
+  @apply text-4xl font-bold mt-8 mb-4 text-gray-900 dark:text-gray-100;
+}
+
+.prose h2 {
+  @apply text-3xl font-bold mt-6 mb-3 text-gray-900 dark:text-gray-100;
+}
+
+.prose h3 {
+  @apply text-2xl font-bold mt-4 mb-2 text-gray-900 dark:text-gray-100;
+}
+
+.prose h6 {
+  @apply text-lg font-semibold mt-3 mb-2 text-gray-900 dark:text-gray-100;
+}
+
+.prose p {
+  @apply leading-relaxed text-gray-700 dark:text-gray-300;
+}
+
+/* Code blocks with better contrast */
+.prose pre {
+  @apply rounded-lg overflow-x-auto my-6 shadow-lg;
+  background: #1e1e1e !important;
+  border: 1px solid #333;
+  padding: 2.5rem 1.5rem 1.25rem 1.5rem;
+  position: relative;
+}
+
+.prose pre code {
+  @apply font-mono;
+  background: transparent !important;
+  color: #d4d4d4 !important;
+  padding: 0 !important;
+  font-size: 14px;
+  line-height: 1.7;
+  display: block;
+}
+
+/* Ensure the parent div has proper spacing */
+.prose pre > div {
+  @apply relative;
+}
+
+/* Inline code */
+.prose code {
+  @apply bg-pink-50 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300 px-1.5 py-0.5 rounded font-mono;
+  font-size: 0.9em;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Override for code inside pre */
+.prose pre code {
+  @apply bg-transparent text-gray-100 p-0;
+  font-weight: 400;
+  white-space: pre;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-blue-500 dark:border-blue-400 pl-4 italic my-6 text-gray-600 dark:text-gray-400 bg-blue-50 dark:bg-blue-900/20 py-2;
+}
+
+.prose ul, .prose ol {
+  @apply ml-6 mb-4 text-gray-700 dark:text-gray-300;
+}
+
+.prose li {
+  @apply mb-2;
+}
+
+.prose a {
+  @apply text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 hover:underline font-medium;
+}
+
+.prose img {
+  @apply rounded-lg my-6 shadow-md w-full;
+}
+
+.prose strong {
+  @apply font-bold text-gray-900 dark:text-gray-100;
+}
+
+.prose em {
+  @apply italic text-gray-700 dark:text-gray-300;
+}
+
+.prose hr {
+  @apply my-6 border-t border-gray-300 dark:border-gray-700;
+}
+
+/* Embed containers */
+.embed-container {
+  @apply my-6 rounded-lg overflow-hidden shadow-lg;
+}
+
+.embed-container iframe {
+  @apply w-full;
+  min-height: 500px;
+  border: none;
+}
+
+/* Masonry Grid Layout */
+.masonry-grid {
+  column-count: 1;
+  column-gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .masonry-grid {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry-grid {
+    column-count: 3;
+  }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Animations for feedback widget */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-once {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+.animate-bounce-once {
+  animation: bounce-once 0.6s ease-in-out;
+}
+
+/* Tremor chart dark mode fixes */
+.dark .recharts-cartesian-axis-line,
+.dark .recharts-cartesian-grid-horizontal line,
+.dark .recharts-cartesian-grid-vertical line {
+  stroke: #404040 !important;
+}
+
+.dark .recharts-text {
+  fill: #d1d5db !important;
+}
+
+/* Tremor Select dropdown background */
+[role="listbox"] {
+  background-color: white !important;
+  border: 1px solid #8b5cf6 !important;
+  border-radius: 4px !important;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+}
+
+.dark [role="listbox"] {
+  background-color: #2d2d2d !important;
+  border: 1px solid #9333ea !important;
+}
+
+[role="option"] {
+  padding: 0.5rem 1rem !important;
+  border-radius: 4px !important;
+  margin: 2px 4px !important;
+}
+
+[role="option"]:hover {
+  background-color: #f3f4f6 !important;
+}
+
+.dark [role="option"]:hover {
+  background-color: #404040 !important;
+}
+
+/* Tremor chart tooltips - comprehensive targeting */
+.recharts-tooltip-wrapper {
+  z-index: 1000 !important;
+}
+
+/* Target all tooltip containers for background */
+.recharts-default-tooltip,
+.recharts-tooltip-wrapper > div > div {
+  background-color: white !important;
+  background: white !important;
+  padding: 12px 16px !important;
+  border-radius: 8px !important;
+  opacity: 1 !important;
+}
+
+.dark .recharts-default-tooltip,
+.dark .recharts-tooltip-wrapper > div > div {
+  background-color: #1f2937 !important;
+  background: #1f2937 !important;
+}
+
+/* Only apply border to the outermost tooltip wrapper */
+.recharts-tooltip-wrapper > div {
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+}
+
+.dark .recharts-tooltip-wrapper > div {
+  border: 1px solid #4b5563 !important;
+}
+
+.recharts-tooltip-label,
+.recharts-default-tooltip .recharts-tooltip-label {
+  color: #111827 !important;
+  font-weight: 600 !important;
+  margin-bottom: 6px !important;
+  font-size: 13px !important;
+}
+
+.dark .recharts-tooltip-label,
+.dark .recharts-default-tooltip .recharts-tooltip-label {
+  color: #f9fafb !important;
+}
+
+.recharts-tooltip-item,
+.recharts-tooltip-item-list li {
+  color: #374151 !important;
+  font-size: 12px !important;
+  padding: 2px 0 !important;
+}
+
+.dark .recharts-tooltip-item,
+.dark .recharts-tooltip-item-list li {
+  color: #e5e7eb !important;
+}
+
+/* Additional tooltip wrapper styling */
+.recharts-tooltip-cursor {
+  fill: rgba(0, 0, 0, 0.05) !important;
+}
+
+.dark .recharts-tooltip-cursor {
+  fill: rgba(255, 255, 255, 0.05) !important;
+}
