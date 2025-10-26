@@ -10,6 +10,7 @@ interface PostAnalytics {
   totalRatings: number;
   averageRating: number;
   engagementRate: number;
+  completionRate: number;
   ratingDistribution: {
     1: number;
     2: number;

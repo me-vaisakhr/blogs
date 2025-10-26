@@ -125,7 +125,7 @@ export function PostFeedback({ slug }: PostFeedbackProps) {
           {EMOJI_RATINGS.map((rating, index) => (
             <button
               key={rating.value}
-              ref={el => buttonRefs.current[index] = el}
+              ref={el => { buttonRefs.current[index] = el; }}
               onClick={() => handleRating(rating.value, index)}
               onMouseEnter={() => setHoveredRating(rating.value)}
               onMouseLeave={() => setHoveredRating(null)}
