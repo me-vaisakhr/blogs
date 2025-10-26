@@ -129,7 +129,7 @@ export async function GET(request: Request, { params }: RouteParams) {
         slug: post.slug,
         title: post.title,
         category: post.category,
-        publishedAt: post.publishedAt,
+        publishedAt: post.date,
       },
       overview: {
         totalViews,
